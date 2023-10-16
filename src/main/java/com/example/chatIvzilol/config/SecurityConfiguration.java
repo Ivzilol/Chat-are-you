@@ -67,20 +67,5 @@ public class SecurityConfiguration {
                         jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
 
-//        http.cors().and().csrf().disable()
-//                .cors(withDefaults());
-//
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http = http.exceptionHandling()
-//                .authenticationEntryPoint((request, response, exception) ->
-//                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-//                                exception.getMessage())).and();
-//
-//        http.authorizeHttpRequests()
-//                .requestMatchers("/**").permitAll()
-//                .anyRequest().authenticated();
-//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-//        return http.build();
     }
 }
