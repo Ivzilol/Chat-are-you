@@ -43,7 +43,7 @@ public class User  implements UserDetails {
     @Column(columnDefinition = "boolean default false")
     private boolean isValidate;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Authority> authorities = new ArrayList<>();
 
     @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)
