@@ -1,7 +1,9 @@
 package com.example.chatIvzilol.controllers;
 
+import com.example.chatIvzilol.model.dto.ForgottenPasswordEmailDto;
 import com.example.chatIvzilol.model.dto.UserRegistrationDTO;
 import com.example.chatIvzilol.model.entity.User;
+import com.example.chatIvzilol.response.CustomResponse;
 import com.example.chatIvzilol.service.UserService;
 import com.example.chatIvzilol.util.JwtUtil;
 import jakarta.mail.MessagingException;
@@ -16,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -61,6 +64,19 @@ public class UserController {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @PostMapping("/register/forgotten-password")
+    public ResponseEntity<?> forgottenPasswordEmail(@RequestBody ForgottenPasswordEmailDto forgottenPasswordDto) throws MessagingException, UnsupportedEncodingException {
+        Optional<User> email = this.userService.findByEmail(forgottenPasswordDto.getEmail());
+        if (email.isPresent()) {
+            this.userService.sendEmailNewPassword(email);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        } else {
+            CustomResponse customResponse = new CustomResponse();
+            customResponse.setCustom("Invalid Email");
+            return ResponseEntity.ok(customResponse);
         }
     }
 }
