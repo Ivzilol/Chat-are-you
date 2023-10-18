@@ -1,6 +1,6 @@
 import {useState} from "react";
 import ajax from "../../Service/FetchService";
-import baseURL from "./BaseURL";
+import baseURL from "../BaseURL/BaseURL";
 
 const ForgottenPasswordEmail = () => {
     const [email, setEmail] = useState("");
