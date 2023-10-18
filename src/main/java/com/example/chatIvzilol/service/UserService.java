@@ -1,5 +1,6 @@
 package com.example.chatIvzilol.service;
 
+import com.example.chatIvzilol.model.dto.ForgottenPasswordNewPasswordDto;
 import com.example.chatIvzilol.model.dto.UserDTO;
 import com.example.chatIvzilol.model.dto.UserRegistrationDTO;
 import com.example.chatIvzilol.model.entity.Authority;
@@ -135,5 +136,21 @@ public class UserService {
         helper.setSubject(subject);
         helper.setText(mailContent, true);
         javaMailSender.send(message);
+    }
+
+    public boolean forgottenPasswordSetNew(ForgottenPasswordNewPasswordDto forgottenPasswordNewPasswordDto) {
+        User user = this.userRepository
+                .findByVerificationCode(forgottenPasswordNewPasswordDto.getVerificationCode());
+        if (forgottenPasswordNewPasswordDto.getPassword() == null || user == null ||
+                !forgottenPasswordNewPasswordDto.getPassword()
+                        .equals(forgottenPasswordNewPasswordDto.getConfirmPassword())) {
+            return false;
+        } else {
+            String encode = encoder.getPasswordEncoder()
+                    .encode(forgottenPasswordNewPasswordDto.getPassword());
+            user.setPassword(encode);
+            this.userRepository.save(user);
+            return true;
+        }
     }
 }

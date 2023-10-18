@@ -1,6 +1,7 @@
 package com.example.chatIvzilol.controllers;
 
 import com.example.chatIvzilol.model.dto.ForgottenPasswordEmailDto;
+import com.example.chatIvzilol.model.dto.ForgottenPasswordNewPasswordDto;
 import com.example.chatIvzilol.model.dto.UserRegistrationDTO;
 import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.response.CustomResponse;
@@ -76,6 +77,18 @@ public class UserController {
         } else {
             CustomResponse customResponse = new CustomResponse();
             customResponse.setCustom("Invalid Email");
+            return ResponseEntity.ok(customResponse);
+        }
+    }
+
+    @PatchMapping("/register/forgotten-password/new-password")
+    public ResponseEntity<?> forgottenPasswordNewPassword(@RequestBody ForgottenPasswordNewPasswordDto forgottenPasswordNewPasswordDto) {
+        boolean newPassword = this.userService.forgottenPasswordSetNew(forgottenPasswordNewPasswordDto);
+        if (newPassword) {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        } else {
+            CustomResponse customResponse = new CustomResponse();
+            customResponse.setCustom("Invalid Password");
             return ResponseEntity.ok(customResponse);
         }
     }
