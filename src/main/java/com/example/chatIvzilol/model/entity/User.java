@@ -43,6 +43,8 @@ public class User  implements UserDetails {
     @Column(columnDefinition = "boolean default false")
     private boolean isValidate;
 
+    private String avatar;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Authority> authorities = new ArrayList<>();
 
