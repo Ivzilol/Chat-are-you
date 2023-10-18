@@ -6,10 +6,15 @@ import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.repository.AuthorityRepository;
 import com.example.chatIvzilol.repository.UserRepository;
 import com.example.chatIvzilol.util.CustomPasswordEncoder;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 @Service
@@ -23,10 +28,13 @@ public class UserService {
 
     private final CustomPasswordEncoder encoder;
 
-    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, CustomPasswordEncoder encoder) {
+    private final JavaMailSender javaMailSender;
+
+    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, CustomPasswordEncoder encoder, JavaMailSender javaMailSender) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
         this.encoder = encoder;
+        this.javaMailSender = javaMailSender;
     }
 
     public Optional<User> findUserByUsername(String username) {
@@ -63,6 +71,36 @@ public class UserService {
         user.setEmail(userRegistrationDTO.getEmail());
         user.setVerificationCode(RandomString.make(64));
         userRepository.save(user);
+        return user;
+    }
+
+    public void sendVerificationEmail(UserRegistrationDTO userRegistrationDTO) throws MessagingException, UnsupportedEncodingException {
+        Optional<User> user = this.userRepository.findByEmail(userRegistrationDTO.getEmail());
+        String siteUrl = "http://localhost:3000/register";
+        String subject = "Successful Registration";
+        String senderName = "Pastry Shop Team";
+        String mailContent = "<h4>Dear " + userRegistrationDTO.getFirstName()
+                + " " + userRegistrationDTO.getLastName() + ",</h4>";
+        mailContent += "<p>Thank you for registration</p>";
+        String verifyUrl = siteUrl + "/verify/" + user.get().getVerificationCode();
+        mailContent += "<p>Please click on the \"ACTIVATE\" link to activate your account.<p/>";
+        mailContent += "<h3><a href=\"" + verifyUrl + "\">ACTIVATE</a></h3>";
+        mailContent += "<p>Mom's sweet shop team<p/>";
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        helper.setFrom("ivailoali@gmail.com", senderName);
+        helper.setTo(userRegistrationDTO.getEmail());
+        helper.setSubject(subject);
+        helper.setText(mailContent, true);
+        javaMailSender.send(message);
+    }
+
+    public User validateUser(String verification) {
+        User user = this.userRepository.findByVerificationCode(verification);
+        if (!user.getEmail().isEmpty()) {
+            user.setValidate(true);
+            this.userRepository.save(user);
+        }
         return user;
     }
 }
