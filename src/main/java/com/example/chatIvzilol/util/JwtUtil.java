@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @Component
 public class JwtUtil implements Serializable {
 
-    public static final long JWT_TOKEN_VALIDITY = 30 * 24 * 60 * 60;
+    public static final long JWT_TOKEN_VALIDITY = 7 * 24 * 60 * 60;
 
     @Value("${jwt.secret}")
     private String secret;

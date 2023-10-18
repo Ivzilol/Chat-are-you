@@ -46,7 +46,76 @@ const Register = () => {
     }
 
     return (
-        <>Register</>
+        <main>
+            <section className="register">
+                <h1>Register</h1>
+                <label>Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    autoComplete="off"
+                    name="username"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <label>Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    autoComplete="off"
+                    name="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <label>Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    autoComplete="off"
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <label>First Name</label>
+                <input
+                    type="text"
+                    id="firstName"
+                    autoComplete="off"
+                    name="firstName"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                />
+                <label>Last Name</label>
+                <input
+                    type="text"
+                    id="lastName"
+                    autoComplete="off"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                />
+                <label>Last Name</label>
+                <input
+                    type="text"
+                    id="email"
+                    autoComplete="off"
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <button
+                    id="submit"
+                    type="button"
+                    onClick={() => registerUser()}
+                >Register</button>
+            </section>
+        </main>
     )
 }
 
