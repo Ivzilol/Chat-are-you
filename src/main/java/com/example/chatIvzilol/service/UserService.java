@@ -78,14 +78,14 @@ public class UserService {
         Optional<User> user = this.userRepository.findByEmail(userRegistrationDTO.getEmail());
         String siteUrl = "http://localhost:3000/register";
         String subject = "Successful Registration";
-        String senderName = "Pastry Shop Team";
+        String senderName = "Chat are you Team";
         String mailContent = "<h4>Dear " + userRegistrationDTO.getFirstName()
                 + " " + userRegistrationDTO.getLastName() + ",</h4>";
         mailContent += "<p>Thank you for registration</p>";
         String verifyUrl = siteUrl + "/verify/" + user.get().getVerificationCode();
         mailContent += "<p>Please click on the \"ACTIVATE\" link to activate your account.<p/>";
         mailContent += "<h3><a href=\"" + verifyUrl + "\">ACTIVATE</a></h3>";
-        mailContent += "<p>Mom's sweet shop team<p/>";
+        mailContent += "<p>Chat are you team<p/>";
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setFrom("ivailoali@gmail.com", senderName);
