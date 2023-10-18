@@ -38,7 +38,7 @@ const Login = () => {
         });
     }
 
-    return(
+    return (
         <main className="login">
             <h1>Login</h1>
             <label>Username</label>
@@ -65,7 +65,8 @@ const Login = () => {
                 id="submit"
                 type="button"
                 onClick={() => loginUser()}
-            >Login</button>
+            >Login
+            </button>
         </main>
     )
 }
