@@ -1,5 +1,6 @@
 package com.example.chatIvzilol.service;
 
+import com.example.chatIvzilol.model.dto.UserDTO;
 import com.example.chatIvzilol.model.dto.UserRegistrationDTO;
 import com.example.chatIvzilol.model.entity.Authority;
 import com.example.chatIvzilol.model.entity.User;
@@ -102,5 +103,13 @@ public class UserService {
             this.userRepository.save(user);
         }
         return user;
+    }
+
+    public Optional<User> validate(String username) {
+        return this.userRepository.findByUsernameAndIsValidate(username);
+    }
+
+    public UserDTO findCurrentUser(String username) {
+        return this.userRepository.findCurrentUserByUsername(username);
     }
 }
