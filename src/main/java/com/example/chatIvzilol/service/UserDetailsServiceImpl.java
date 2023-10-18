@@ -1,6 +1,6 @@
 package com.example.chatIvzilol.service;
 
-import com.example.chatIvzilol.model.User;
+import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

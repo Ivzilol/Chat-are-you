@@ -1,11 +1,12 @@
 package com.example.chatIvzilol.controllers;
 
+import com.example.chatIvzilol.model.dto.UserRegistrationDTO;
 import com.example.chatIvzilol.service.UserService;
 import com.example.chatIvzilol.util.JwtUtil;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -24,5 +25,11 @@ public class UserController {
         this.jwtUtil = jwtUtil;
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<?> createUser(@RequestBody @Valid UserRegistrationDTO userRegistrationDTO) {
+        this.userService.createUser(userRegistrationDTO);
 
+
+        return null;
+    }
 }

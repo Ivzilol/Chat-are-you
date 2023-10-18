@@ -1,4 +1,4 @@
-package com.example.chatIvzilol.model;
+package com.example.chatIvzilol.model.entity;
 
 
 import jakarta.persistence.*;

@@ -1,30 +1,27 @@
-package com.example.chatIvzilol.model;
+package com.example.chatIvzilol.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class ChatMessage {
+public class Authority implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "TEXT")
-    private String message;
+    private String authority;
 
-    @Column
-    private LocalDateTime createdDate;
+    @ManyToOne(optional = false)
+    private User user;
 
-    @ManyToOne
-    private ChatRoom chatRoom;
+
 }

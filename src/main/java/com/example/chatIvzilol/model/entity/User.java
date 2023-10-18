@@ -1,4 +1,4 @@
-package com.example.chatIvzilol.model;
+package com.example.chatIvzilol.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -43,7 +43,7 @@ public class User  implements UserDetails {
     @Column(columnDefinition = "boolean default false")
     private boolean isValidate;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Authority> authorities = new ArrayList<>();
 
     @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)
