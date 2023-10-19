@@ -1,7 +1,9 @@
-import {useUser} from "../../UserProvider/UserProvider";
+
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import baseURL from "../BaseURL/BaseURL";
+import {useUser} from "../../UserProvider/UserProvider";
+
 
 const Register = () => {
 
