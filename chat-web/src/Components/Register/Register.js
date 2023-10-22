@@ -20,7 +20,7 @@ const Register = () => {
         if (user.jwt) navigate("/")
     }, [navigate, user.jwt])
 
-    const onFileSelectedHandler = (e) => {
+    const avatarSubmit = (e) => {
         if (e.target.files[0] && e.target.files[0].name !== "") {
             setAvatar(e.target.files[0])
         }
@@ -136,7 +136,7 @@ const Register = () => {
                     id="avatar"
                     name="avatar"
                     placeholder="Avatar"
-                    onChange={onFileSelectedHandler}
+                    onChange={avatarSubmit}
                 />
                 <button
                     id="submit"
