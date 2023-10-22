@@ -17,7 +17,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
@@ -38,9 +40,11 @@ public class UserController {
         this.jwtUtil = jwtUtil;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> createUser(@RequestBody @Valid UserRegistrationDTO userRegistrationDTO) throws MessagingException, UnsupportedEncodingException {
-        this.userService.createUser(userRegistrationDTO);
+    @PostMapping(value = "/register", consumes = {"multipart/form-data"})
+    public ResponseEntity<?> createUser(
+            @RequestPart(value = "avatar", required = false) MultipartFile file,
+            @RequestPart(value = "dto") UserRegistrationDTO userRegistrationDTO) throws MessagingException, IOException {
+        this.userService.createUser(userRegistrationDTO, file);
         this.userService.sendVerificationEmail(userRegistrationDTO);
         try {
             Authentication authentication = authenticationManager
@@ -57,6 +61,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
 
     @PostMapping("/register/verify/{verification}")
     private ResponseEntity<?> verificationUser(@PathVariable String verification) {

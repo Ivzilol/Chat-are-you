@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
@@ -32,11 +34,14 @@ public class UserService {
 
     private final JavaMailSender javaMailSender;
 
-    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, CustomPasswordEncoder encoder, JavaMailSender javaMailSender) {
+    private final CloudinaryService cloudinaryService;
+
+    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, CustomPasswordEncoder encoder, JavaMailSender javaMailSender, CloudinaryService cloudinaryService) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
         this.encoder = encoder;
         this.javaMailSender = javaMailSender;
+        this.cloudinaryService = cloudinaryService;
     }
 
     public Optional<User> findUserByUsername(String username) {
@@ -47,16 +52,16 @@ public class UserService {
         return this.userRepository.findByEmail(email);
     }
 
-    public void createUser(UserRegistrationDTO userRegistrationDTO) {
+    public void createUser(UserRegistrationDTO userRegistrationDTO, MultipartFile file) throws IOException {
         if (userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())
                 && userRegistrationDTO.getPassword().equals(adminPass)) {
-            User newUser = createUserOrAdmin(userRegistrationDTO);
+            User newUser = createUserOrAdmin(userRegistrationDTO, file);
             Authority authority = new Authority();
             authority.setAuthority("admin");
             authority.setUser(newUser);
             this.authorityRepository.save(authority);
         } else if (userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())) {
-            User newUser = createUserOrAdmin(userRegistrationDTO);
+            User newUser = createUserOrAdmin(userRegistrationDTO, file);
             Authority authority = new Authority();
             authority.setAuthority("user");
             authority.setUser(newUser);
@@ -64,7 +69,7 @@ public class UserService {
         }
     }
 
-    private User createUserOrAdmin(UserRegistrationDTO userRegistrationDTO) {
+    private User createUserOrAdmin(UserRegistrationDTO userRegistrationDTO, MultipartFile file) throws IOException {
         User user = new User();
         user.setUsername(userRegistrationDTO.getUsername());
         user.setFirstName(userRegistrationDTO.getFirstName());
@@ -72,8 +77,17 @@ public class UserService {
         user.setPassword(encoder.getPasswordEncoder().encode(userRegistrationDTO.getPassword()));
         user.setEmail(userRegistrationDTO.getEmail());
         user.setVerificationCode(RandomString.make(64));
+        user.setAvatar(getAvatar(file));
         userRepository.save(user);
         return user;
+    }
+
+    private String getAvatar(MultipartFile file) throws IOException {
+        String avatarUrl = "";
+        if (file != null) {
+            avatarUrl = this.cloudinaryService.uploadAvatar(file);
+        }
+        return avatarUrl;
     }
 
     public void sendVerificationEmail(UserRegistrationDTO userRegistrationDTO) throws MessagingException, UnsupportedEncodingException {

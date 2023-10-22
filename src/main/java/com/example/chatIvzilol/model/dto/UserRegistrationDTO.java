@@ -9,9 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
+
 @Getter
 @Setter
 public class UserRegistrationDTO {
@@ -37,4 +40,18 @@ public class UserRegistrationDTO {
     @Email
     @NotNull
     private String email;
+    private MultipartFile avatar;
+
+    public UserRegistrationDTO(String username, String firstName, String lastName, String password, String confirmPassword, String email, MultipartFile avatar) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.email = email;
+        this.avatar = avatar;
+    }
+
+    public UserRegistrationDTO() {
+    }
 }
