@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import baseURL from "../BaseURL/BaseURL";
 
-
 const Register = () => {
 
     const user = useUser();
@@ -14,14 +13,24 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [avatar, setAvatar] = useState();
 
 
     useEffect(() => {
         if (user.jwt) navigate("/")
     }, [navigate, user.jwt])
 
-    function registerUser() {
-        const requestBody = {
+    const onFileSelectedHandler = (e) => {
+        if (e.target.files[0] && e.target.files[0].name !== "") {
+            setAvatar(e.target.files[0])
+        }
+
+    }
+
+    function bodyUserRegister(avatar, username, firstName, lastName, email, password, confirmPassword) {
+        const formData = new FormData();
+        formData.append("avatar", avatar);
+        const dto = {
             username: username,
             firstName: firstName,
             lastName: lastName,
@@ -29,12 +38,20 @@ const Register = () => {
             password: password,
             confirmPassword: confirmPassword
         }
+        formData.append("dto",
+            new Blob([JSON.stringify(dto)], {
+                type: "application/json",
+            })
+        );
+        return formData;
+    }
+
+    function registerUser() {
+        const formData = bodyUserRegister(avatar, username, firstName, lastName, email, password, confirmPassword);
+        // console.log(formData)
         fetch(`${baseURL}api/users/register`, {
-            headers: {
-                "Content-Type": "application/json",
-            },
             method: "POST",
-            body: JSON.stringify(requestBody),
+            body: formData,
         })
             .then((response) => {
                 if (response.status === 200)
@@ -100,7 +117,7 @@ const Register = () => {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                 />
-                <label>Last Name</label>
+                <label>Email</label>
                 <input
                     type="text"
                     id="email"
@@ -109,6 +126,17 @@ const Register = () => {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                />
+                <label>Avatar</label>
+                <input
+                    className="input-avatar"
+                    type="file"
+                    accept='image/png, image/jpeg'
+                    size='sm'
+                    id="avatar"
+                    name="avatar"
+                    placeholder="Avatar"
+                    onChange={onFileSelectedHandler}
                 />
                 <button
                     id="submit"
