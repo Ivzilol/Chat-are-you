@@ -2,18 +2,10 @@ package com.example.chatIvzilol.model.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 public class ChatRoom {
 
     @Id
@@ -27,6 +19,40 @@ public class ChatRoom {
     private String uniqueCode;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<User> user;
+    private Set<User> userRooms;
 
+    public ChatRoom() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUniqueCode() {
+        return uniqueCode;
+    }
+
+    public void setUniqueCode(String uniqueCode) {
+        this.uniqueCode = uniqueCode;
+    }
+
+    public Set<User> getUserRooms() {
+        return userRooms;
+    }
+
+    public void setUserRooms(Set<User> userRooms) {
+        this.userRooms = userRooms;
+    }
 }

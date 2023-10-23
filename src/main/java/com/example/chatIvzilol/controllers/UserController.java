@@ -6,7 +6,6 @@ import com.example.chatIvzilol.response.CustomResponse;
 import com.example.chatIvzilol.service.UserService;
 import com.example.chatIvzilol.util.JwtUtil;
 import jakarta.mail.MessagingException;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
