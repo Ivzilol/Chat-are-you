@@ -48,7 +48,6 @@ const Register = () => {
 
     function registerUser() {
         const formData = bodyUserRegister(avatar, username, firstName, lastName, email, password, confirmPassword);
-        // console.log(formData)
         fetch(`${baseURL}api/users/register`, {
             method: "POST",
             body: formData,
@@ -60,6 +59,10 @@ const Register = () => {
             })
             .then(() => {
                 user.setJwt(user.jwt)
+                alert("Successful registration")
+            })
+            .catch(() => {
+                alert("Unsuccessful registration")
             })
     }
 

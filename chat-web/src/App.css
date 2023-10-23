@@ -21,3 +21,20 @@
 .input-avatar {
   margin-left: 80px;
 }
+
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-profile-container-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 25%;
+  height: 25%;
+}
