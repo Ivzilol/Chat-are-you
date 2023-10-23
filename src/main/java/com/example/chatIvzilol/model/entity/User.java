@@ -46,7 +46,7 @@ public class User  implements UserDetails {
 
     private String avatar;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Authority> authorities = new ArrayList<>();
 
     @ManyToMany(mappedBy = "user", fetch = FetchType.EAGER)

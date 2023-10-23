@@ -2,6 +2,7 @@ package com.example.chatIvzilol.controllers;
 
 import com.example.chatIvzilol.model.dto.ForgottenPasswordEmailDto;
 import com.example.chatIvzilol.model.dto.ForgottenPasswordNewPasswordDto;
+import com.example.chatIvzilol.model.dto.UserDTO;
 import com.example.chatIvzilol.model.dto.UserRegistrationDTO;
 import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.response.CustomResponse;
@@ -16,6 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -96,5 +98,11 @@ public class UserController {
             customResponse.setCustom("Invalid Password");
             return ResponseEntity.ok(customResponse);
         }
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal User user) {
+        Optional<UserDTO> currentUser = this.userService.getCurrentUser(user);
+        return ResponseEntity.ok(currentUser);
     }
 }

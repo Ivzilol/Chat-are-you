@@ -19,8 +19,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
             " where u.username = :username and u.isValidate = true")
     Optional<User> findByUsernameAndIsValidate(String username);
     @Query("select new com.example.chatIvzilol.model.dto.UserDTO(" +
-            "u.id, u.username, u.firstName, u.lastName, u.email)" +
+            "u.id, u.username, u.firstName, u.lastName, u.email, u.avatar)" +
             " from User as u" +
             " where u.username = :username")
     UserDTO findCurrentUserByUsername(String username);
+
+    @Query("select new com.example.chatIvzilol.model.dto.UserDTO(" +
+            "u.id, u.username, u.firstName, u.lastName, u.email, u.avatar)" +
+            " from User as u" +
+            " where u.username = :username")
+    Optional<UserDTO> findUserByUsername(String username);
 }
