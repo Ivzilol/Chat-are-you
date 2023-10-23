@@ -29,4 +29,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
             " from User as u" +
             " where u.username = :username")
     Optional<UserDTO> findUserByUsername(String username);
+
+    @Query("select new com.example.chatIvzilol.model.dto.UserDTO(" +
+            "u.id, u.username, u.firstName, u.lastName, u.email, u.avatar)" +
+            " from User as u" +
+            " where u.id = :id")
+    Optional<UserDTO> findUserById(Long id);
 }
