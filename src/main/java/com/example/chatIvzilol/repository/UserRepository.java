@@ -35,4 +35,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             " from User as u" +
             " where u.id = :id")
     Optional<UserDTO> findUserById(Long id);
+    @Query("select u from User as u" +
+            " where u.id = :id")
+    User findByUserId(Long id);
 }

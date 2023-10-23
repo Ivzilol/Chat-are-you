@@ -1,6 +1,7 @@
 package com.example.chatIvzilol.service;
 
 import com.example.chatIvzilol.model.dto.ForgottenPasswordNewPasswordDto;
+import com.example.chatIvzilol.model.dto.UpdateUserDTO;
 import com.example.chatIvzilol.model.dto.UserDTO;
 import com.example.chatIvzilol.model.dto.UserRegistrationDTO;
 import com.example.chatIvzilol.model.entity.Authority;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -177,5 +179,31 @@ public class UserService {
 
     public Optional<UserDTO> getUserById(Long id) {
         return this.userRepository.findUserById(id);
+    }
+
+    public boolean updateUser(UpdateUserDTO updateUserDTO, Long id, MultipartFile avatar) throws IOException {
+        User updateUser = this.userRepository.findByUserId(id);
+        Optional<User> userUsername = this.userRepository.findByUsername(updateUserDTO.getUsername());
+        Optional<User> userEmail = this.userRepository.findByEmail(updateUserDTO.getEmail());
+        // Checking whether the username and email with which he is trying to change them
+        // are not taken by another user
+        if (userUsername.isPresent() && !Objects.equals(userUsername.get().getId(), id)) {
+            return false;
+        } else {
+            if (userEmail.isPresent() && !Objects.equals(id, userEmail.get().getId())) {
+                return false;
+            } else {
+                updateUser.setPassword(updateUser.getPassword());
+                updateUser.setUsername(updateUserDTO.getUsername());
+                updateUser.setFirstName(updateUserDTO.getFirstName());
+                updateUser.setLastName(updateUserDTO.getLastName());
+                updateUser.setEmail(updateUserDTO.getEmail());
+                if (avatar != null) {
+                    updateUser.setAvatar(getAvatar(avatar));
+                }
+                this.userRepository.save(updateUser);
+                return true;
+            }
+        }
     }
 }

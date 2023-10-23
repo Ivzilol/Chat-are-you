@@ -1,9 +1,6 @@
 package com.example.chatIvzilol.controllers;
 
-import com.example.chatIvzilol.model.dto.ForgottenPasswordEmailDto;
-import com.example.chatIvzilol.model.dto.ForgottenPasswordNewPasswordDto;
-import com.example.chatIvzilol.model.dto.UserDTO;
-import com.example.chatIvzilol.model.dto.UserRegistrationDTO;
+import com.example.chatIvzilol.model.dto.*;
 import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.response.CustomResponse;
 import com.example.chatIvzilol.service.UserService;
@@ -110,5 +107,15 @@ public class UserController {
     public ResponseEntity<?> getUserById(@PathVariable Long id){
         Optional<UserDTO> user = this.userService.getUserById(id);
         return ResponseEntity.ok(user);
+    }
+
+    @PatchMapping("/edit/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable Long id,
+                                        @RequestPart(value = "avatar", required = false) MultipartFile avatar,
+                                        @RequestPart(value = "dto") UpdateUserDTO updateUserDTO) throws IOException {
+        boolean updateUser = this.userService.updateUser(updateUserDTO, id, avatar);
+        CustomResponse customResponse = new CustomResponse();
+        customResponse.setCustom(updateUser ? "Successful update user!" : "Unsuccessful update user!");
+        return ResponseEntity.ok(customResponse);
     }
 }
