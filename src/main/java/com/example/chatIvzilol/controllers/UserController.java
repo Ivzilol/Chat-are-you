@@ -118,4 +118,17 @@ public class UserController {
         customResponse.setCustom(updateUser ? "Successful update user!" : "Unsuccessful update user!");
         return ResponseEntity.ok(customResponse);
     }
+
+    @PatchMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDto changePasswordDto,
+                                            @AuthenticationPrincipal User user) {
+        boolean userChangePass = this.userService.changeUserPassword(changePasswordDto, user);
+        if (userChangePass) {
+            CustomResponse customResponse = new CustomResponse();
+            customResponse.setCustom("Successful change password");
+            return ResponseEntity.ok(customResponse);
+        } else {
+            return ResponseEntity.ok(null);
+        }
+    }
 }

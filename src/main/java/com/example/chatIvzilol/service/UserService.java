@@ -1,9 +1,6 @@
 package com.example.chatIvzilol.service;
 
-import com.example.chatIvzilol.model.dto.ForgottenPasswordNewPasswordDto;
-import com.example.chatIvzilol.model.dto.UpdateUserDTO;
-import com.example.chatIvzilol.model.dto.UserDTO;
-import com.example.chatIvzilol.model.dto.UserRegistrationDTO;
+import com.example.chatIvzilol.model.dto.*;
 import com.example.chatIvzilol.model.entity.Authority;
 import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.repository.AuthorityRepository;
@@ -15,6 +12,8 @@ import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,12 +42,18 @@ public class UserService {
 
     private final CloudinaryService cloudinaryService;
 
-    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, CustomPasswordEncoder encoder, JavaMailSender javaMailSender, CloudinaryService cloudinaryService) {
+    private final CustomPasswordEncoder customPasswordEncoder;
+
+    private final AuthenticationManager authenticationManager;
+
+    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, CustomPasswordEncoder encoder, JavaMailSender javaMailSender, CloudinaryService cloudinaryService, CustomPasswordEncoder customPasswordEncoder, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.authorityRepository = authorityRepository;
         this.encoder = encoder;
         this.javaMailSender = javaMailSender;
         this.cloudinaryService = cloudinaryService;
+        this.customPasswordEncoder = customPasswordEncoder;
+        this.authenticationManager = authenticationManager;
     }
 
     public Optional<User> findUserByUsername(String username) {
@@ -205,5 +210,28 @@ public class UserService {
                 return true;
             }
         }
+    }
+
+    public boolean changeUserPassword(ChangePasswordDto changePasswordDto, User user) {
+        boolean passwordMatch = ifPasswordMatch(changePasswordDto, user);
+        if (passwordMatch) {
+            String encodedPassword = customPasswordEncoder
+                    .getPasswordEncoder().encode(changePasswordDto.getNewPassword());
+            user.setPassword(encodedPassword);
+            this.userRepository.save(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean ifPasswordMatch(ChangePasswordDto changePasswordDto, User user) {
+        boolean matchesOldPassword = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(
+                        user.getUsername(), changePasswordDto.getOldPassword()
+                )).isAuthenticated();
+        boolean matchesNewPassword = changePasswordDto.getNewPassword()
+                .equals(changePasswordDto.getConfirmNewPassword());
+        return matchesOldPassword && matchesNewPassword;
     }
 }
