@@ -55,3 +55,9 @@
   flex-direction: column;
   align-items: center;
 }
+
+.create-chat-room-container-items {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}

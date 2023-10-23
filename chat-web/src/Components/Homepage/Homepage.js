@@ -1,9 +1,12 @@
+import CreateChatRoom from "../ChatRoom/CreateChatRoom";
 
 
 const Homepage = () => {
 
     return (
-        <>Homepage</>
+        <>Homepage
+        <CreateChatRoom/>
+        </>
     )
 }
 
