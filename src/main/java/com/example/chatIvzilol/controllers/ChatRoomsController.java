@@ -1,13 +1,17 @@
 package com.example.chatIvzilol.controllers;
 
 import com.example.chatIvzilol.model.dto.CreateChatRoomDTO;
+import com.example.chatIvzilol.model.dto.OtherUsersDTO;
+import com.example.chatIvzilol.model.dto.UserDTO;
 import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.response.CustomResponse;
 import com.example.chatIvzilol.service.ChatRoomService;
-import org.springframework.http.HttpStatus;
+import com.example.chatIvzilol.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/chat-rooms")
@@ -16,8 +20,11 @@ public class ChatRoomsController {
 
     private final ChatRoomService chatRoomService;
 
-    public ChatRoomsController(ChatRoomService chatRoomService) {
+    private final UserService userService;
+
+    public ChatRoomsController(ChatRoomService chatRoomService, UserService userService) {
         this.chatRoomService = chatRoomService;
+        this.userService = userService;
     }
 
 
@@ -32,5 +39,11 @@ public class ChatRoomsController {
             customResponse.setCustom("You not create chatroom");
         }
         return ResponseEntity.ok(customResponse);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<?> getAllUsers(@AuthenticationPrincipal User user) {
+        Set<OtherUsersDTO> allUsers = this.userService.getAllUser(user);
+        return ResponseEntity.ok(allUsers);
     }
 }

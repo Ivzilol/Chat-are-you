@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -240,5 +241,9 @@ public class UserService {
         authority.setAuthority("chatModerator");
         authority.setUser(currentUser);
         authorityRepository.save(authority);
+    }
+
+    public Set<OtherUsersDTO> getAllUser(User user) {
+        return this.userRepository.getAllUsers(user.getUsername());
     }
 }

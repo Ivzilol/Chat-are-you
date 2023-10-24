@@ -1,5 +1,6 @@
 package com.example.chatIvzilol.repository;
 
+import com.example.chatIvzilol.model.dto.OtherUsersDTO;
 import com.example.chatIvzilol.model.dto.UserDTO;
 import com.example.chatIvzilol.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -38,4 +40,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u from User as u" +
             " where u.id = :id")
     User findByUserId(Long id);
+
+    @Query("select new com.example.chatIvzilol.model.dto.OtherUsersDTO(" +
+            " u.id, u.username)" +
+            " from User as u" +
+            " where u.username <> :username")
+    Set<OtherUsersDTO> getAllUsers(String username);
 }
