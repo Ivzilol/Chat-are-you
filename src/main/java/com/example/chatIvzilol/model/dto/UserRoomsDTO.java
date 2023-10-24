@@ -14,4 +14,6 @@ public class UserRoomsDTO {
     private Long id;
 
     private String name;
+
+    private String code;
 }

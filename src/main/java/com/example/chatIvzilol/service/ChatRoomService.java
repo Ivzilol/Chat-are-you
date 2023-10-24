@@ -1,6 +1,7 @@
 package com.example.chatIvzilol.service;
 
 import com.example.chatIvzilol.model.dto.CreateChatRoomDTO;
+import com.example.chatIvzilol.model.dto.OtherUsersDTO;
 import com.example.chatIvzilol.model.dto.UserRoomsDTO;
 import com.example.chatIvzilol.model.entity.ChatRoom;
 import com.example.chatIvzilol.model.entity.User;
@@ -58,8 +59,23 @@ public class ChatRoomService {
             UserRoomsDTO userRoomsDTO = new UserRoomsDTO();
             userRoomsDTO.setId(chatRoom.getId());
             userRoomsDTO.setName(chatRoom.getName());
+            userRoomsDTO.setCode(chatRoom.getUniqueCode());
             returnRooms.add(userRoomsDTO);
         }
         return returnRooms;
+    }
+
+    public Set<OtherUsersDTO> findUsersOnRoom(String roomId) {
+        ChatRoom chatRoom = this.chatRoomRepository.findByUniqueCode(roomId);
+        Set<User> usersInRooms = new HashSet<>();
+        usersInRooms = chatRoom.getUserRooms();
+        Set<OtherUsersDTO> forReturn = new HashSet<>();
+        for (User user : usersInRooms) {
+            OtherUsersDTO otherUsersDTO = new OtherUsersDTO();
+            otherUsersDTO.setId(user.getId());
+            otherUsersDTO.setUsername(user.getUsername());
+            forReturn.add(otherUsersDTO);
+        }
+        return forReturn;
     }
 }
