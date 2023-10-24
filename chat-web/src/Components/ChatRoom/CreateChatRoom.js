@@ -24,8 +24,10 @@ const CreateChatRoom = () => {
 
         ajax(`${baseURL}api/chat-rooms/create`, "POST", user.jwt, requestBody)
             .then((response) => {
-                if (response === 200) {
-                    alert("Successful your chat room")
+                if (response.custom === 'Successful create chatroom') {
+                    alert(response.custom)
+                } else {
+                    alert(response.custom)
                 }
             })
     }
