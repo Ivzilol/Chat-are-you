@@ -34,6 +34,7 @@ public class ChatRoomService {
             chatRoom.setName(createChatRoomDTO.getChatroomName());
             String code = RandomString.make(32);
             chatRoom.setUniqueCode(code);
+            chatRoom.setUserCreator(currentUser);
             Set<User> check = new HashSet<>();
             chatRoom.setUserRooms(check);
             chatRoom.getUserRooms().add(currentUser);

@@ -21,6 +21,9 @@ public class ChatRoom {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> userRooms;
 
+    @ManyToOne
+    private User userCreator;
+
     public ChatRoom() {
     }
 
@@ -54,5 +57,13 @@ public class ChatRoom {
 
     public void setUserRooms(Set<User> userRooms) {
         this.userRooms = userRooms;
+    }
+
+    public User getUserCreator() {
+        return userCreator;
+    }
+
+    public void setUserCreator(User userCreator) {
+        this.userCreator = userCreator;
     }
 }
