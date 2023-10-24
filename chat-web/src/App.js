@@ -13,6 +13,7 @@ import Homepage from "./Components/Homepage/Homepage";
 import jwt_decode from 'jwt-decode'
 import UserEditProfile from "./Components/User/UserEditProfile";
 import UserChangePassword from "./Components/User/UserChangePassword";
+import ChatRoomUser from "./Components/ChatRoom/ChatRoomUser";
 
 function App() {
     const user = useUser();
@@ -49,6 +50,7 @@ function App() {
             <Route path="/forgotten-password/:verificationCode" element={<ForgottenPasswordNewPassword/>}/>
             <Route path="/users/:userId" element={<UserEditProfile/>}/>
             <Route path="users/change-password" element={<UserChangePassword/>}/>
+            <Route path="/chat-rooms/:roomId" element={<ChatRoomUser/>}/>
         </Routes>
     );
 }

@@ -21,13 +21,16 @@ const UserChatRooms = () => {
             {rooms ? (
                 <section className="user-chat-rooms-container">
                     {rooms.map((room) => (
-                        <div id={room.id}
+                        <div id={room.code}
                              key={room.id}
                              className="user-chat-rooms-container-items">
                             <button
-                                id={room.id}
+                                id={room.code}
                                 key={room.id}
                                 type="button"
+                                onClick={() => {
+                                    window.location.href = `/chat-rooms/${room.code}`
+                                }}
                             >
                                 {room.name}
                             </button>
