@@ -41,7 +41,7 @@ public class ChatRoomService {
             chatRoom.setUserRooms(check);
             chatRoom.getUserRooms().add(currentUser);
             this.chatRoomRepository.save(chatRoom);
-            this.userService.addRoleModerator(currentUser);
+//            this.userService.addRoleModerator(currentUser);
             return true;
         }
         return false;
@@ -53,29 +53,10 @@ public class ChatRoomService {
     }
 
     public Set<UserRoomsDTO> getUserRooms(User user) {
-        User currentUser = this.userRepository.findByUserId(user.getId());
-        Set<UserRoomsDTO> returnRooms = new HashSet<>();
-        for (ChatRoom chatRoom : currentUser.getChatRooms()) {
-            UserRoomsDTO userRoomsDTO = new UserRoomsDTO();
-            userRoomsDTO.setId(chatRoom.getId());
-            userRoomsDTO.setName(chatRoom.getName());
-            userRoomsDTO.setCode(chatRoom.getUniqueCode());
-            returnRooms.add(userRoomsDTO);
-        }
-        return returnRooms;
+        return this.chatRoomRepository.findUserRooms(user.getUsername());
     }
 
     public Set<OtherUsersDTO> findUsersOnRoom(String roomId) {
-        ChatRoom chatRoom = this.chatRoomRepository.findByUniqueCode(roomId);
-        Set<User> usersInRooms = new HashSet<>();
-        usersInRooms = chatRoom.getUserRooms();
-        Set<OtherUsersDTO> forReturn = new HashSet<>();
-        for (User user : usersInRooms) {
-            OtherUsersDTO otherUsersDTO = new OtherUsersDTO();
-            otherUsersDTO.setId(user.getId());
-            otherUsersDTO.setUsername(user.getUsername());
-            forReturn.add(otherUsersDTO);
-        }
-        return forReturn;
+        return this.chatRoomRepository.findUsersInRoom(roomId);
     }
 }
