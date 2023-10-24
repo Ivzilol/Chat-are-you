@@ -1,6 +1,7 @@
 package com.example.chatIvzilol.service;
 
 import com.example.chatIvzilol.model.dto.CreateChatRoomDTO;
+import com.example.chatIvzilol.model.dto.UserRoomsDTO;
 import com.example.chatIvzilol.model.entity.ChatRoom;
 import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.model.enums.AuthorityEnum;
@@ -48,5 +49,17 @@ public class ChatRoomService {
     private static boolean isAdmin(User user) {
         return user.getAuthorities()
                 .stream().anyMatch(auth -> AuthorityEnum.chatModerator.name().equals(auth.getAuthority()));
+    }
+
+    public Set<UserRoomsDTO> getUserRooms(User user) {
+        User currentUser = this.userRepository.findByUserId(user.getId());
+        Set<UserRoomsDTO> returnRooms = new HashSet<>();
+        for (ChatRoom chatRoom : currentUser.getChatRooms()) {
+            UserRoomsDTO userRoomsDTO = new UserRoomsDTO();
+            userRoomsDTO.setId(chatRoom.getId());
+            userRoomsDTO.setName(chatRoom.getName());
+            returnRooms.add(userRoomsDTO);
+        }
+        return returnRooms;
     }
 }

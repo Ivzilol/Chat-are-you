@@ -3,6 +3,7 @@ package com.example.chatIvzilol.controllers;
 import com.example.chatIvzilol.model.dto.CreateChatRoomDTO;
 import com.example.chatIvzilol.model.dto.OtherUsersDTO;
 import com.example.chatIvzilol.model.dto.UserDTO;
+import com.example.chatIvzilol.model.dto.UserRoomsDTO;
 import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.response.CustomResponse;
 import com.example.chatIvzilol.service.ChatRoomService;
@@ -45,5 +46,11 @@ public class ChatRoomsController {
     public ResponseEntity<?> getAllUsers(@AuthenticationPrincipal User user) {
         Set<OtherUsersDTO> allUsers = this.userService.getAllUser(user);
         return ResponseEntity.ok(allUsers);
+    }
+
+    @GetMapping("/user-rooms")
+    public ResponseEntity<?> getUserRooms(@AuthenticationPrincipal User user) {
+        Set<UserRoomsDTO> userRoomsDTO = this.chatRoomService.getUserRooms(user);
+        return ResponseEntity.ok(userRoomsDTO);
     }
 }
