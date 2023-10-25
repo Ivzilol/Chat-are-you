@@ -16,7 +16,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/chat-rooms")
-@CrossOrigin(origins = {"http://localhost:3000/"}, allowCredentials = "false", allowedHeaders = "true")
+//@CrossOrigin(origins = {"http://localhost:3000/"}, allowCredentials = "false", allowedHeaders = "true")
 public class ChatRoomsController {
 
     private final ChatRoomService chatRoomService;
