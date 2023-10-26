@@ -2,7 +2,6 @@ package com.example.chatIvzilol.controllers;
 
 import com.example.chatIvzilol.model.dto.CreateChatRoomDTO;
 import com.example.chatIvzilol.model.dto.OtherUsersDTO;
-import com.example.chatIvzilol.model.dto.UserDTO;
 import com.example.chatIvzilol.model.dto.UserRoomsDTO;
 import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.response.CustomResponse;
