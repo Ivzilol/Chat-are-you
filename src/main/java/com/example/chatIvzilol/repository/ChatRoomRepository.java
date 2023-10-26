@@ -25,4 +25,7 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long> {
             " JOIN cr.userRooms as u" +
             " where u.username = :username")
     Set<UserRoomsDTO> findUserRooms(String username);
+
+    ChatRoom findByUniqueCode(String roomId);
+
 }

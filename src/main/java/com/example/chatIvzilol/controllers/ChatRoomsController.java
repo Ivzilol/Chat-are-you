@@ -1,5 +1,6 @@
 package com.example.chatIvzilol.controllers;
 
+import com.example.chatIvzilol.model.dto.AddUserRoomDTO;
 import com.example.chatIvzilol.model.dto.CreateChatRoomDTO;
 import com.example.chatIvzilol.model.dto.OtherUsersDTO;
 import com.example.chatIvzilol.model.dto.UserRoomsDTO;
@@ -8,6 +9,8 @@ import com.example.chatIvzilol.response.CustomResponse;
 import com.example.chatIvzilol.service.ChatRoomService;
 import com.example.chatIvzilol.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,5 +60,19 @@ public class ChatRoomsController {
     public ResponseEntity<?> getUsersChatRoom(@PathVariable String roomId) {
         Set<OtherUsersDTO> otherUsersDTO = this.chatRoomService.findUsersOnRoom(roomId);
         return ResponseEntity.ok(otherUsersDTO);
+    }
+
+    @PostMapping("/add-user/{roomId}")
+    public ResponseEntity<?> addUserInRoom(@PathVariable String roomId,
+                                           @AuthenticationPrincipal User user,
+                                           @RequestBody AddUserRoomDTO addUserRoomDTO) {
+        boolean isAdded = this.chatRoomService.addUserInRoom(roomId, user, addUserRoomDTO);
+        CustomResponse customResponse = new CustomResponse();
+        if (isAdded) {
+            customResponse.setCustom("Successful add user in room");
+        } else {
+            customResponse.setCustom("Unsuccessful add user in room");
+        }
+        return ResponseEntity.ok(customResponse);
     }
 }

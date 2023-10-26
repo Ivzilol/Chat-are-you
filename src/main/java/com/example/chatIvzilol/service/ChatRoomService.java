@@ -1,5 +1,6 @@
 package com.example.chatIvzilol.service;
 
+import com.example.chatIvzilol.model.dto.AddUserRoomDTO;
 import com.example.chatIvzilol.model.dto.CreateChatRoomDTO;
 import com.example.chatIvzilol.model.dto.OtherUsersDTO;
 import com.example.chatIvzilol.model.dto.UserRoomsDTO;
@@ -58,5 +59,18 @@ public class ChatRoomService {
 
     public Set<OtherUsersDTO> findUsersOnRoom(String roomId) {
         return this.chatRoomRepository.findUsersInRoom(roomId);
+    }
+
+    public boolean addUserInRoom(String roomId, User user, AddUserRoomDTO addUserRoomDTO) {
+       User userWhoAdds = this.userRepository.findByUserId(user.getId());
+       User userForAdd = this.userRepository.findByUserId(addUserRoomDTO.getId());
+       if (roomId != null) {
+           ChatRoom chatRoom = this.chatRoomRepository.findByUniqueCode(roomId);
+           Set<User> check = new HashSet<>();
+           chatRoom.getUserRooms().add(userForAdd);
+           this.chatRoomRepository.save(chatRoom);
+           return true;
+       }
+       return false;
     }
 }
