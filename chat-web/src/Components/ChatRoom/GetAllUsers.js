@@ -4,15 +4,15 @@ import baseURL from "../BaseURL/BaseURL";
 import {useEffect, useState} from "react";
 
 
-const GetAllUsers = () => {
+const GetAllUsers = (props) => {
 
     const user = useUser();
-    const [users, setUsers] = useState(null)
+    const [usersOnline, setUsersOnline] = useState(null)
 
     useEffect(() => {
         ajax(`${baseURL}api/chat-rooms/users`, "GET", user.jwt)
             .then((response) => {
-                setUsers(response);
+                setUsersOnline(response);
             })
     }, [user.jwt])
 
@@ -20,9 +20,9 @@ const GetAllUsers = () => {
 
     return (
         <main className="all-users-chat">
-            {users ? (
+            {usersOnline ? (
                 <section className="all-users-chat-container">
-                    {users.map((user) => (
+                    {usersOnline.map((user) => (
                         <div className="all-users-chat-container-items"
                              key={user.id}
                              id={user.id}

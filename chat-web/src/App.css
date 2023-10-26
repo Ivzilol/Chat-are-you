@@ -62,7 +62,7 @@
   align-items: start;
 }
 
-.all-users-chat {
+.all-users-chat-container {
   position: fixed;
   right: 0;
   top: 0;

@@ -4,10 +4,27 @@ import ajax from "../../Service/FetchService";
 import baseURL from "../BaseURL/BaseURL";
 import {over} from 'stompjs';
 import SockJS from 'sockjs-client';
-import GetAllUsers from "./GetAllUsers";
 import jwt_decode from "jwt-decode";
+import * as PropTypes from "prop-types";
 
 let stompClient = null;
+
+function UserOnline(props) {
+    return <section className="user-online">
+        {props.usersOnline ? (
+            <section className="all-users-chat-container">
+                {props.usersOnline.map(props.prop1)}
+            </section>
+        ) : (
+            <></>
+        )}
+    </section>;
+}
+
+UserOnline.propTypes = {
+    usersOnline: PropTypes.any,
+    prop1: PropTypes.func
+};
 const ChatRoomUser = () => {
 
     const user = useUser();
@@ -15,6 +32,7 @@ const ChatRoomUser = () => {
     const [users, setUsers] = useState(null);
     const [publicChats, setPublicChats] = useState([]);
     const [roles, setRoles] = useState(null);
+    const [usersOnline, setUsersOnline] = useState(null)
     const [userData, setUserData] = useState({
         username: '',
         receiverName: '',
@@ -28,7 +46,6 @@ const ChatRoomUser = () => {
                 setUsers(response)
                 const decodeJwt = jwt_decode(user.jwt);
                 setRoles(decodeJwt.sub)
-                // connect()
             })
     }, [roomCode, user.jwt])
 
@@ -77,7 +94,7 @@ const ChatRoomUser = () => {
                 message: userData.message,
                 status: "MESSAGE"
             }
-            if(userData.message.trim() === ""){
+            if (userData.message.trim() === "") {
                 return;
             }
             console.log(chatMessage);
@@ -92,10 +109,29 @@ const ChatRoomUser = () => {
         }
     }, [roles]);
 
+    useEffect(() => {
+        ajax(`${baseURL}api/chat-rooms/users`, "GET", user.jwt)
+            .then((response) => {
+                setUsersOnline(response);
+            })
+    }, [user.jwt])
+
+
+    function addUserInRoom(id) {
+        const requestBody = {
+            id: id
+        }
+        ajax(`${baseURL}api/chat-rooms/add-user/${roomCode}`, "POST", user.jwt, requestBody)
+            .then((response) => {
+                if (response.custom === 'Successful add user in room') {
+                    alert(response.custom)
+                }
+            })
+    }
+
 
     return (
         <main className="chat-room">
-            <GetAllUsers/>
             {users ? (
                 <section className="chat-room-container">
                     {users.map(user => (
@@ -144,6 +180,23 @@ const ChatRoomUser = () => {
                     <></>
                 }
             </div>
+            <UserOnline
+                usersOnline={usersOnline}
+                prop1={(user) => (
+                <div className="all-users-chat-container-items"
+                     key={user.id}
+                     id={user.id}
+                >
+                    <button
+                        id={user.id}
+                        key={user.id}
+                        type="button"
+                        onClick={() => addUserInRoom(user.id)}
+                    >
+                        {user.username}
+                    </button>
+                </div>
+            )}/>
         </main>
     )
 }
