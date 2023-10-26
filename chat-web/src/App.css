@@ -67,3 +67,7 @@
   right: 0;
   top: 0;
 }
+
+.chat-message-row {
+  list-style: none;
+}
