@@ -6,6 +6,7 @@ import {over} from 'stompjs';
 import SockJS from 'sockjs-client';
 import jwt_decode from "jwt-decode";
 import * as PropTypes from "prop-types";
+import {useNavigate} from "react-router-dom";
 
 let stompClient = null;
 
@@ -28,6 +29,7 @@ UserOnline.propTypes = {
 const ChatRoomUser = () => {
 
     const user = useUser();
+    const navigate = useNavigate();
     const roomCode = window.location.href.split("/chat-rooms/")[1];
     const [users, setUsers] = useState(null);
     const [publicChats, setPublicChats] = useState([]);
@@ -137,6 +139,18 @@ const ChatRoomUser = () => {
             })
     }, [])
 
+    function leftRoom() {
+        ajax(`${baseURL}api/chat-rooms/left/${roomCode}`, "DELETE", user.jwt)
+            .then((response) => {
+                if (response.custom === "Successful left room") {
+                    alert(response.custom);
+                    navigate("/")
+                } else {
+                    alert(response.custom)
+                }
+            })
+    }
+
 
     return (
         <main className="chat-room">
@@ -161,7 +175,8 @@ const ChatRoomUser = () => {
                                 {oldMessages !== null ? oldMessages.map((oldMessage) => (
                                     <li key={oldMessage.id}
                                         className="chat-message-row">
-                                        <div className="chat-message-data">{oldMessage.username}: {oldMessage.message}</div>
+                                        <div
+                                            className="chat-message-data">{oldMessage.username}: {oldMessage.message}</div>
                                     </li>
                                 )) : (
                                     <></>
@@ -190,6 +205,12 @@ const ChatRoomUser = () => {
                                     send
                                 </button>
                             </div>
+                            <button
+                                type="button"
+                                className="left-button"
+                                onClick={leftRoom}
+                            >left room
+                            </button>
                         </div>
                     </div>
                     :
@@ -199,20 +220,20 @@ const ChatRoomUser = () => {
             <UserOnline
                 usersOnline={usersOnline}
                 prop1={(user) => (
-                <div className="all-users-chat-container-items"
-                     key={user.id}
-                     id={user.id}
-                >
-                    <button
-                        id={user.id}
-                        key={user.id}
-                        type="button"
-                        onClick={() => addUserInRoom(user.id)}
+                    <div className="all-users-chat-container-items"
+                         key={user.id}
+                         id={user.id}
                     >
-                        {user.username}
-                    </button>
-                </div>
-            )}/>
+                        <button
+                            id={user.id}
+                            key={user.id}
+                            type="button"
+                            onClick={() => addUserInRoom(user.id)}
+                        >
+                            {user.username}
+                        </button>
+                    </div>
+                )}/>
         </main>
     )
 }
