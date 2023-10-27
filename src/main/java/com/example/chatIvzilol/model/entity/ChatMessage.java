@@ -27,4 +27,7 @@ public class ChatMessage {
 
     @ManyToOne
     private ChatRoom chatRoom;
+
+    @ManyToOne
+    private User messageCreator;
 }
