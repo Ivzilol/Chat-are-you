@@ -9,8 +9,6 @@ import com.example.chatIvzilol.response.CustomResponse;
 import com.example.chatIvzilol.service.ChatRoomService;
 import com.example.chatIvzilol.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
