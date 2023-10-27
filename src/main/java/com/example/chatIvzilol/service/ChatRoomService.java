@@ -42,7 +42,6 @@ public class ChatRoomService {
             chatRoom.setUserRooms(check);
             chatRoom.getUserRooms().add(currentUser);
             this.chatRoomRepository.save(chatRoom);
-//            this.userService.addRoleModerator(currentUser);
             return true;
         }
         return false;
@@ -64,9 +63,8 @@ public class ChatRoomService {
     public boolean addUserInRoom(String roomId, User user, AddUserRoomDTO addUserRoomDTO) {
        User userWhoAdds = this.userRepository.findByUserId(user.getId());
        User userForAdd = this.userRepository.findByUserId(addUserRoomDTO.getId());
-       if (roomId != null) {
+       if (roomId != null && userWhoAdds != null) {
            ChatRoom chatRoom = this.chatRoomRepository.findByUniqueCode(roomId);
-           Set<User> check = new HashSet<>();
            chatRoom.getUserRooms().add(userForAdd);
            this.chatRoomRepository.save(chatRoom);
            return true;
