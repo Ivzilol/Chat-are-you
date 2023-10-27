@@ -16,6 +16,7 @@ public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> 
             " from ChatMessage as cm" +
             " JOIN ChatRoom as cr on cm.chatRoom.id = cr.id" +
             " JOIN User as u on cm.messageCreator.id = u.id" +
-            " where cr.uniqueCode = :room")
+            " where cr.uniqueCode = :room" +
+            " order by cm.createdDate asc")
     Set<ChatMessageDTO> findByRoom(String room);
 }
