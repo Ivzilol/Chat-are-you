@@ -1,12 +1,21 @@
 package com.example.chatIvzilol.controllers;
 
+import com.example.chatIvzilol.model.dto.ChatMessageDTO;
 import com.example.chatIvzilol.model.dto.Message;
+import com.example.chatIvzilol.model.entity.ChatMessage;
+import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.service.MessageService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.Set;
 
 @Controller
 public class ChatController {
@@ -26,5 +35,12 @@ public class ChatController {
        if (message.getMessage() != null) {
            messageService.saveMessage(message, room);
        }
+    }
+
+    @GetMapping("api/message/get-messages/{room}")
+    public ResponseEntity<?> getMessagesFromChat(@PathVariable String room,
+                                                 @AuthenticationPrincipal User user) {
+        Set<ChatMessageDTO> chatMessageDTO = this.messageService.getAllMessagesFromRoom(room, user);
+        return ResponseEntity.ok(chatMessageDTO);
     }
 }

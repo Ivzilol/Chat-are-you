@@ -1,6 +1,7 @@
 package com.example.chatIvzilol.service;
 
 
+import com.example.chatIvzilol.model.dto.ChatMessageDTO;
 import com.example.chatIvzilol.model.dto.Message;
 import com.example.chatIvzilol.model.entity.ChatMessage;
 import com.example.chatIvzilol.model.entity.ChatRoom;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class MessageService {
@@ -37,5 +39,9 @@ public class MessageService {
         ChatRoom chatRoom = this.chatRoomRepository.findByUniqueCode(room);
         chatMessage.setChatRoom(chatRoom);
         this.messageRepository.save(chatMessage);
+    }
+
+    public Set<ChatMessageDTO> getAllMessagesFromRoom(String room, User user) {
+        return this.messageRepository.findByRoom(room);
     }
 }
