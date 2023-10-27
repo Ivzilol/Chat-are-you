@@ -2,7 +2,6 @@ package com.example.chatIvzilol.controllers;
 
 import com.example.chatIvzilol.model.dto.ChatMessageDTO;
 import com.example.chatIvzilol.model.dto.Message;
-import com.example.chatIvzilol.model.entity.ChatMessage;
 import com.example.chatIvzilol.model.entity.User;
 import com.example.chatIvzilol.service.MessageService;
 import org.springframework.http.ResponseEntity;
