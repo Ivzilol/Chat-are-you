@@ -75,4 +75,17 @@ public class ChatRoomsController {
         }
         return ResponseEntity.ok(customResponse);
     }
+
+    @DeleteMapping("/left/{roomId}")
+    public ResponseEntity<?> removeUser(@PathVariable String roomId,
+                                        @AuthenticationPrincipal User user) {
+        boolean isRemove = this.chatRoomService.removeUserFromChatRoom(roomId, user);
+        CustomResponse customResponse = new CustomResponse();
+        if (isRemove) {
+            customResponse.setCustom("Successful left room");
+        } else {
+            customResponse.setCustom("Unsuccessful left room");
+        }
+        return ResponseEntity.ok(customResponse);
+    }
 }
