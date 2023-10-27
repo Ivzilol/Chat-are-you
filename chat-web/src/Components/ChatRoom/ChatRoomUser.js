@@ -33,6 +33,7 @@ const ChatRoomUser = () => {
     const [publicChats, setPublicChats] = useState([]);
     const [roles, setRoles] = useState(null);
     const [usersOnline, setUsersOnline] = useState(null)
+    const [oldMessages, setOldMessages] = useState(null);
     const [userData, setUserData] = useState({
         username: '',
         receiverName: '',
@@ -129,6 +130,13 @@ const ChatRoomUser = () => {
             })
     }
 
+    useEffect(() => {
+        ajax(`${baseURL}api/message/get-messages/${roomCode}`, "GET", user.jwt)
+            .then((response) => {
+                setOldMessages(response);
+            })
+    }, [])
+
 
     return (
         <main className="chat-room">
@@ -150,6 +158,14 @@ const ChatRoomUser = () => {
                     <div className="chat-box">
                         <div className="chat-content">
                             <ul className="chat-message">
+                                {oldMessages !== null ? oldMessages.map((oldMessage) => (
+                                    <li key={oldMessage.id}
+                                        className="chat-message-row">
+                                        <div className="chat-message-data">{oldMessage.username}: {oldMessage.message}</div>
+                                    </li>
+                                )) : (
+                                    <></>
+                                )}
                                 {publicChats.map((chat, index) => (
                                     <li key={index}
                                         className="chat-message-row">
