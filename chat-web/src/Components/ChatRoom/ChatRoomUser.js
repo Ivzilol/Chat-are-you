@@ -184,7 +184,12 @@ const ChatRoomUser = () => {
                                 {publicChats.map((chat, index) => (
                                     <li key={index}
                                         className="chat-message-row">
-                                        <div className="chat-message-data">{chat.senderName}: {chat.message}</div>
+                                        {chat.message !== null
+                                            ?
+                                            <div className="chat-message-data">{chat.senderName}: {chat.message}</div>
+                                            :
+                                            <></>
+                                        }
                                     </li>
                                 ))}
                             </ul>
