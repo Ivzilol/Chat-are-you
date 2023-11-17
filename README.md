@@ -1,4 +1,4 @@
-![image](https://github.com/Ivzilol/Chat-are-you/assets/106906817/5c32ab1f-1965-44f9-8c30-1e337f3f7c6c)# ReactJS-Spring-Boot-Full-Stack-Chat-App
+# ReactJS-Spring-Boot-Full-Stack-Chat-App
 <h3>Content</h3>
 
 - Features
