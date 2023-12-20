@@ -71,7 +71,6 @@ public class ChatRoomService {
        }
        return false;
     }
-
     public boolean removeUserFromChatRoom(String roomId, User user) {
         User userForRemove = this.userRepository.findByUserId(user.getId());
         ChatRoom chatRoom = this.chatRoomRepository.findByUniqueCode(roomId);
