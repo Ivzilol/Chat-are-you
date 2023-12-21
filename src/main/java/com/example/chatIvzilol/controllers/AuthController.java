@@ -21,7 +21,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-
     private final AuthenticationManager authenticationManager;
 
     private final JwtUtil jwtUtil;
