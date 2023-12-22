@@ -20,7 +20,6 @@ import java.util.Set;
 public class ChatController {
     private final SimpMessagingTemplate simpMessagingTemplate;
     private final MessageService messageService;
-
     public ChatController(SimpMessagingTemplate simpMessagingTemplate, MessageService messageService) {
         this.simpMessagingTemplate = simpMessagingTemplate;
         this.messageService = messageService;
