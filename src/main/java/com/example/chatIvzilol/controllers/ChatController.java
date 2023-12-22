@@ -19,7 +19,6 @@ import java.util.Set;
 @RestController
 public class ChatController {
     private final SimpMessagingTemplate simpMessagingTemplate;
-
     private final MessageService messageService;
 
     public ChatController(SimpMessagingTemplate simpMessagingTemplate, MessageService messageService) {
