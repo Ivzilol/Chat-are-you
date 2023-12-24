@@ -18,7 +18,6 @@ import java.util.Set;
 @RequestMapping("/api/chat-rooms")
 public class ChatRoomsController {
     private final ChatRoomService chatRoomService;
-
     private final UserService userService;
 
     public ChatRoomsController(ChatRoomService chatRoomService, UserService userService) {
