@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
+import static com.example.chatIvzilol.common.ConstantMessages.SUCCESSFUL_LEFT_ROOM;
+
 @RestController
 @RequestMapping("/api/chat-rooms")
 public class ChatRoomsController {
@@ -76,7 +78,7 @@ public class ChatRoomsController {
         boolean isRemove = this.chatRoomService.removeUserFromChatRoom(roomId, user);
         CustomResponse customResponse = new CustomResponse();
         if (isRemove) {
-            customResponse.setCustom("Successful left room");
+            customResponse.setCustom(SUCCESSFUL_LEFT_ROOM);
         } else {
             customResponse.setCustom("Unsuccessful left room");
         }
