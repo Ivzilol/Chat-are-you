@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 import static com.example.chatIvzilol.common.ConstantMessages.SUCCESSFUL_LEFT_ROOM;
+import static com.example.chatIvzilol.common.ConstantMessages.UNSUCCESSFUL_LEFT_ROOM;
 
 @RestController
 @RequestMapping("/api/chat-rooms")
@@ -80,7 +81,7 @@ public class ChatRoomsController {
         if (isRemove) {
             customResponse.setCustom(SUCCESSFUL_LEFT_ROOM);
         } else {
-            customResponse.setCustom("Unsuccessful left room");
+            customResponse.setCustom(UNSUCCESSFUL_LEFT_ROOM);
         }
         return ResponseEntity.ok(customResponse);
     }
