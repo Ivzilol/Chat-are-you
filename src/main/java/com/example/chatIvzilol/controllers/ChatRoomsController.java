@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
-import static com.example.chatIvzilol.common.ConstantMessages.SUCCESSFUL_LEFT_ROOM;
-import static com.example.chatIvzilol.common.ConstantMessages.UNSUCCESSFUL_LEFT_ROOM;
+import static com.example.chatIvzilol.common.ConstantMessages.*;
 
 @RestController
 @RequestMapping("/api/chat-rooms")
@@ -66,7 +65,7 @@ public class ChatRoomsController {
         boolean isAdded = this.chatRoomService.addUserInRoom(roomId, user, addUserRoomDTO);
         CustomResponse customResponse = new CustomResponse();
         if (isAdded) {
-            customResponse.setCustom("Successful add user in room");
+            customResponse.setCustom(SUCCESSFUL_ADD_ROOM);
         } else {
             customResponse.setCustom("Unsuccessful add user in room");
         }
