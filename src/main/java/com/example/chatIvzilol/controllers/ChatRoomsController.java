@@ -67,7 +67,7 @@ public class ChatRoomsController {
         if (isAdded) {
             customResponse.setCustom(SUCCESSFUL_ADD_ROOM);
         } else {
-            customResponse.setCustom("Unsuccessful add user in room");
+            customResponse.setCustom(UNSUCCESSFUL_ADD_ROOM);
         }
         return ResponseEntity.ok(customResponse);
     }
