@@ -35,7 +35,7 @@ public class ChatRoomsController {
         if (isCreate) {
             customResponse.setCustom(SUCCESSFUL_CREATE_ROOM);
         } else {
-            customResponse.setCustom("You not create chatroom");
+            customResponse.setCustom(UNSUCCESSFUL_CREATE_ROOM);
         }
         return ResponseEntity.ok(customResponse);
     }
