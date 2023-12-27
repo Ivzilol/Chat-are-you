@@ -33,7 +33,7 @@ public class ChatRoomsController {
         boolean isCreate = chatRoomService.createRoom(user, createChatRoomDTO);
         CustomResponse customResponse = new CustomResponse();
         if (isCreate) {
-            customResponse.setCustom("Successful create chatroom");
+            customResponse.setCustom(SUCCESSFUL_CREATE_ROOM);
         } else {
             customResponse.setCustom("You not create chatroom");
         }
