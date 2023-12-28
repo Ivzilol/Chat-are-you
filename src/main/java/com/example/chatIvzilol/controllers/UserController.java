@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
+import static com.example.chatIvzilol.common.ConstantMessages.SUCCESSFUL_CHANGE_PASSWORD;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -123,7 +125,7 @@ public class UserController {
         boolean userChangePass = this.userService.changeUserPassword(changePasswordDto, user);
         if (userChangePass) {
             CustomResponse customResponse = new CustomResponse();
-            customResponse.setCustom("Successful change password");
+            customResponse.setCustom(SUCCESSFUL_CHANGE_PASSWORD);
             return ResponseEntity.ok(customResponse);
         } else {
             return ResponseEntity.ok(null);
