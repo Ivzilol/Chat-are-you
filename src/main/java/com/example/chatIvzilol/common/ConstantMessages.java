@@ -10,4 +10,5 @@ public class ConstantMessages {
     public static final String UNSUCCESSFUL_CREATE_ROOM = "You not create chatroom";
     public static final String SUCCESSFUL_CHANGE_PASSWORD = "Successful change password";
     public static final String SUCCESSFUL_UPDATE_USER = "Successful update user!";
+    public static final String UNSUCCESSFUL_UPDATE_USER = "Unsuccessful update user!";
 }
