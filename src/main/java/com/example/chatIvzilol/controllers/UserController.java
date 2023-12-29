@@ -22,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 import static com.example.chatIvzilol.common.ConstantMessages.*;
+import static com.example.chatIvzilol.common.ErrorMessages.INVALID_PASSWORD;
 
 @RestController
 @RequestMapping("/api/users")
@@ -92,7 +93,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.ACCEPTED).build();
         } else {
             CustomResponse customResponse = new CustomResponse();
-            customResponse.setCustom("Invalid Password");
+            customResponse.setCustom(INVALID_PASSWORD);
             return ResponseEntity.ok(customResponse);
         }
     }
