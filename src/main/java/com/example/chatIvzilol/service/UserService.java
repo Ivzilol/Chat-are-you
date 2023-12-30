@@ -28,7 +28,6 @@ public class UserService {
     private final UserRepository userRepository;
     @Value("${admin_password}")
     private String adminPass;
-
     private static final String REGISTER_URL = "http://localhost:3000/register";
 
     private static final String FORGOT_PASSWORD_URL = "http://localhost:3000/forgotten-password/";
