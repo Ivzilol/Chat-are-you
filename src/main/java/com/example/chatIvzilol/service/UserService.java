@@ -30,7 +30,6 @@ public class UserService {
     private String adminPass;
     private static final String REGISTER_URL = "http://localhost:3000/register";
     private static final String FORGOT_PASSWORD_URL = "http://localhost:3000/forgotten-password/";
-
     private final AuthorityRepository authorityRepository;
 
     private final CustomPasswordEncoder encoder;
