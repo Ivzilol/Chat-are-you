@@ -35,7 +35,6 @@ public class UserService {
     private final JavaMailSender javaMailSender;
     private final CloudinaryService cloudinaryService;
     private final CustomPasswordEncoder customPasswordEncoder;
-
     private final AuthenticationManager authenticationManager;
 
     public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, CustomPasswordEncoder encoder, JavaMailSender javaMailSender, CloudinaryService cloudinaryService, CustomPasswordEncoder customPasswordEncoder, AuthenticationManager authenticationManager) {
