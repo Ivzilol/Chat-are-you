@@ -17,7 +17,6 @@ import java.util.Set;
 
 @Service
 public class MessageService {
-
     private final ChatMessageRepository messageRepository;
 
     private final UserRepository userRepository;
