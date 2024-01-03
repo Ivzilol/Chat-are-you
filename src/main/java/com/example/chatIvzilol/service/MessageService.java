@@ -19,7 +19,6 @@ import java.util.Set;
 public class MessageService {
     private final ChatMessageRepository messageRepository;
     private final UserRepository userRepository;
-
     private final ChatRoomRepository chatRoomRepository;
 
     public MessageService(ChatMessageRepository messageRepository, UserRepository userRepository, ChatRoomRepository chatRoomRepository) {
