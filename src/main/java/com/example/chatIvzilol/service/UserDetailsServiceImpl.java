@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.example.chatIvzilol.common.ErrorMessages.INVALID_CREDENTIAL;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
@@ -18,6 +20,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> userOpt = userRepository.findByUsername(username);
-        return userOpt.orElseThrow(() -> new UsernameNotFoundException("Invalid Credential"));
+        return userOpt.orElseThrow(() -> new UsernameNotFoundException(INVALID_CREDENTIAL));
     }
 }
