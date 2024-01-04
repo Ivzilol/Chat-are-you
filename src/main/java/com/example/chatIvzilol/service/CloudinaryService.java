@@ -11,7 +11,6 @@ import java.util.Collections;
 
 @Service
 public class CloudinaryService {
-
     private static final String TEMP_FILE = "temp-file";
     private static final String URL = "url";
     private final Cloudinary cloudinary;
