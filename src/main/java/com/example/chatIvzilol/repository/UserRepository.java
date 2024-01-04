@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
     Optional<User> findByEmail(String email);
     User findByVerificationCode(String code);
+
     @Query("select u from User as u" +
             " where u.username = :username and u.isValidate = true")
     Optional<User> findByUsernameAndIsValidate(String username);
