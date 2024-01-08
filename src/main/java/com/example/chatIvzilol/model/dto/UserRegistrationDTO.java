@@ -21,7 +21,6 @@ public class UserRegistrationDTO {
     private String username;
     @NotNull
     private String firstName;
-
     @NotNull
     private String lastName;
 
