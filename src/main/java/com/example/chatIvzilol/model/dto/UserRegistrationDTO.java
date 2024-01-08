@@ -23,7 +23,6 @@ public class UserRegistrationDTO {
     private String firstName;
     @NotNull
     private String lastName;
-
     @NotNull
     private String password;
 
