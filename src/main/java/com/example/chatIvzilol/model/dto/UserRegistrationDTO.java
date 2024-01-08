@@ -27,7 +27,6 @@ public class UserRegistrationDTO {
     private String password;
     @NotNull
     private String confirmPassword;
-
     @UniqueEmail
     @Email
     @NotNull
