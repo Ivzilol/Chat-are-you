@@ -25,7 +25,6 @@ public class UserRegistrationDTO {
     private String lastName;
     @NotNull
     private String password;
-
     @NotNull
     private String confirmPassword;
 
