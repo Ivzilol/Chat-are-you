@@ -17,5 +17,4 @@ public class ForgottenPasswordNewPasswordDto {
     private String password;
 
     private String confirmPassword;
-
 }
