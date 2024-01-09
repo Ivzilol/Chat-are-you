@@ -16,7 +16,6 @@ public class UpdateUserDTO {
     @UniqueUsername
     private String username;
 
-
     private String firstName;
 
 
