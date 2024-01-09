@@ -20,5 +20,4 @@ public class ChatMessageDTO {
     private LocalDateTime createdDate;
 
     private String username;
-
 }
