@@ -28,7 +28,6 @@ import static com.example.chatIvzilol.common.ErrorMessages.INVALID_PASSWORD;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-
     private final UserService userService;
 
     private final AuthenticationManager authenticationManager;
