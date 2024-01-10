@@ -30,7 +30,6 @@ import static com.example.chatIvzilol.common.ErrorMessages.INVALID_PASSWORD;
 public class UserController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
-
     private final JwtUtil jwtUtil;
 
     public UserController(UserService userService, AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
