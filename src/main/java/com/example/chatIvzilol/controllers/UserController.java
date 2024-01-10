@@ -110,7 +110,6 @@ public class UserController {
         customResponse.setCustom(updateUser ? SUCCESSFUL_UPDATE_USER : UNSUCCESSFUL_UPDATE_USER);
         return ResponseEntity.ok(customResponse);
     }
-
     @PatchMapping("/change-password")
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDto changePasswordDto,
                                             @AuthenticationPrincipal User user) {
