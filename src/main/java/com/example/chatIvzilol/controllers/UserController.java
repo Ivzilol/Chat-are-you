@@ -80,7 +80,6 @@ public class UserController {
             return ResponseEntity.ok(customResponse);
         }
     }
-
     @PatchMapping("/register/forgotten-password/new-password")
     public ResponseEntity<?> forgottenPasswordNewPassword(@RequestBody ForgottenPasswordNewPasswordDto forgottenPasswordNewPasswordDto) {
         boolean newPassword = this.userService.forgottenPasswordSetNew(forgottenPasswordNewPasswordDto);
