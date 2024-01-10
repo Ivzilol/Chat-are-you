@@ -60,7 +60,6 @@ public class UserController {
         }
     }
 
-
     @PostMapping("/register/verify/{verification}")
     private ResponseEntity<?> verificationUser(@PathVariable String verification) {
         User user = this.userService.validateUser(verification);
