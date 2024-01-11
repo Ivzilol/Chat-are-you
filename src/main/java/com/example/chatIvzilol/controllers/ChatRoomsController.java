@@ -38,7 +38,6 @@ public class ChatRoomsController {
         }
         return ResponseEntity.ok(customResponse);
     }
-
     @GetMapping("/users")
     public ResponseEntity<?> getAllUsers(@AuthenticationPrincipal User user) {
         Set<OtherUsersDTO> allUsers = this.userService.getAllUser(user);
