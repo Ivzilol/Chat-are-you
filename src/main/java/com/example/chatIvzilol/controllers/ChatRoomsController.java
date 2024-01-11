@@ -66,7 +66,6 @@ public class ChatRoomsController {
         }
         return ResponseEntity.ok(customResponse);
     }
-
     @DeleteMapping("/left/{roomId}")
     public ResponseEntity<?> removeUser(@PathVariable String roomId,
                                         @AuthenticationPrincipal User user) {
