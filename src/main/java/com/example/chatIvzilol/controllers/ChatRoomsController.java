@@ -43,7 +43,6 @@ public class ChatRoomsController {
         Set<OtherUsersDTO> allUsers = this.userService.getAllUser(user);
         return ResponseEntity.ok(allUsers);
     }
-
     @GetMapping("/user-rooms")
     public ResponseEntity<?> getUserRooms(@AuthenticationPrincipal User user) {
         Set<UserRoomsDTO> userRoomsDTO = this.chatRoomService.getUserRooms(user);
