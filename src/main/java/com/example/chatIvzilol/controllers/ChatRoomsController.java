@@ -26,7 +26,6 @@ public class ChatRoomsController {
         this.chatRoomService = chatRoomService;
         this.userService = userService;
     }
-
     @PostMapping("/create")
     public ResponseEntity<?> createChatRoom(@AuthenticationPrincipal User user,
                                             @RequestBody CreateChatRoomDTO createChatRoomDTO) {
