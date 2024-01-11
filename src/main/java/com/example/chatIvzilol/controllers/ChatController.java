@@ -33,7 +33,6 @@ public class ChatController {
             }
         }
     }
-
     @GetMapping("api/message/get-messages/{room}")
     public ResponseEntity<?> getMessagesFromChat(@PathVariable String room,
                                                  @AuthenticationPrincipal User user) {
