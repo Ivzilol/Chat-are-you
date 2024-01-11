@@ -48,7 +48,6 @@ public class ChatRoomsController {
         Set<UserRoomsDTO> userRoomsDTO = this.chatRoomService.getUserRooms(user);
         return ResponseEntity.ok(userRoomsDTO);
     }
-
     @GetMapping("/{roomId}")
     public ResponseEntity<?> getUsersChatRoom(@PathVariable String roomId) {
         Set<OtherUsersDTO> otherUsersDTO = this.chatRoomService.findUsersOnRoom(roomId);
