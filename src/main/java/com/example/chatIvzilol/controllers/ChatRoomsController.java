@@ -53,7 +53,6 @@ public class ChatRoomsController {
         Set<OtherUsersDTO> otherUsersDTO = this.chatRoomService.findUsersOnRoom(roomId);
         return ResponseEntity.ok(otherUsersDTO);
     }
-
     @PostMapping("/add-user/{roomId}")
     public ResponseEntity<?> addUserInRoom(@PathVariable String roomId,
                                            @AuthenticationPrincipal User user,
