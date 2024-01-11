@@ -24,7 +24,6 @@ public class ChatController {
         this.simpMessagingTemplate = simpMessagingTemplate;
         this.messageService = messageService;
     }
-
     @MessageMapping("/message/{room}")
     public synchronized void receiveMessage(@Payload Message message, @DestinationVariable String room) {
         simpMessagingTemplate.convertAndSend("/chat-rooms/" + room, message);
