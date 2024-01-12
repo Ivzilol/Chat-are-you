@@ -30,7 +30,6 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
         this.userService = userService;
     }
-
     @PostMapping("login")
     public ResponseEntity<?> login (@RequestBody AuthCredentialRequest request) {
         Optional<User> validateUser = ifValidate(request);
