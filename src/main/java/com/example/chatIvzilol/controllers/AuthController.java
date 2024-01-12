@@ -53,7 +53,6 @@ public class AuthController {
     private Optional<User> ifValidate(AuthCredentialRequest request) {
         return this.userService.validate(request.getUsername());
     }
-
     @GetMapping("/validate")
     public ResponseEntity<?> validateToken(@RequestParam String token,
                                            @AuthenticationPrincipal User user) {
