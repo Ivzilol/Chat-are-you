@@ -50,7 +50,6 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-
     private Optional<User> ifValidate(AuthCredentialRequest request) {
         return this.userService.validate(request.getUsername());
     }
