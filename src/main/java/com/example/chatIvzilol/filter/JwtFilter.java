@@ -58,7 +58,6 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
-
         UsernamePasswordAuthenticationToken authentication =
                 new UsernamePasswordAuthenticationToken(
                         userDetails, null,
