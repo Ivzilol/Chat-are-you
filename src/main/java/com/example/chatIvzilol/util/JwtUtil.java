@@ -61,7 +61,6 @@ public class JwtUtil implements Serializable {
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
-
     public Boolean canTokenBeRefreshed(String token) {
         return (!isTokenExpired(token) || Boolean.TRUE.equals(ignoreTokenExpiration(token)));
     }
