@@ -44,7 +44,6 @@ public class JwtUtil implements Serializable {
     private Boolean ignoreTokenExpiration(String token) {
         return null;
     }
-
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("authorities", userDetails
