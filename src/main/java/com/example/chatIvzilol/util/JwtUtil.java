@@ -41,7 +41,6 @@ public class JwtUtil implements Serializable {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
-
     private Boolean ignoreTokenExpiration(String token) {
         return null;
     }
