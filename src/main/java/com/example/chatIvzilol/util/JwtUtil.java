@@ -53,7 +53,6 @@ public class JwtUtil implements Serializable {
                 .collect(Collectors.toList()));
         return doGenerateToken(claims, userDetails.getUsername());
     }
-
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
                 .setClaims(claims)
