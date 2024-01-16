@@ -13,6 +13,5 @@ import java.lang.annotation.*;
 public @interface UniqueEmail {
     String message() default "Email already exist";
     Class<?>[] groups() default {};
-
     Class<? extends Payload>[] payload() default {};
 }
