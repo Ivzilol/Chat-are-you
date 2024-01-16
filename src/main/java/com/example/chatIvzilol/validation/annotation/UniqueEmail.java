@@ -1,7 +1,6 @@
 package com.example.chatIvzilol.validation.annotation;
 
 import com.example.chatIvzilol.validation.UniqueEmailValidator;
-import com.example.chatIvzilol.validation.UniqueUsernameValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
