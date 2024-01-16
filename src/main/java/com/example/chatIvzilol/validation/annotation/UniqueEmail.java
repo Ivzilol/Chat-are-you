@@ -12,7 +12,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueEmail {
     String message() default "Email already exist";
-
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
