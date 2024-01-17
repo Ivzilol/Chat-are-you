@@ -219,7 +219,6 @@ public class UserService {
                 .equals(changePasswordDto.getConfirmNewPassword());
         return matchesOldPassword && matchesNewPassword;
     }
-
     public void addRoleModerator(User currentUser) {
         Authority authority = new Authority();
         authority.setAuthority("chatModerator");
