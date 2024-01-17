@@ -87,7 +87,6 @@ public class UserService {
         }
         return avatarUrl;
     }
-
     public void sendVerificationEmail(UserRegistrationDTO userRegistrationDTO) throws MessagingException, UnsupportedEncodingException {
         Optional<User> user = this.userRepository.findByEmail(userRegistrationDTO.getEmail());
         String subject = "Successful Registration";
