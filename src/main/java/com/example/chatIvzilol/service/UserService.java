@@ -80,7 +80,6 @@ public class UserService {
         userRepository.save(user);
         return user;
     }
-
     private String getAvatar(MultipartFile file) throws IOException {
         String avatarUrl = "";
         if (file != null) {
