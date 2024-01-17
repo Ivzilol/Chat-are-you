@@ -68,7 +68,6 @@ public class UserService {
             authorityRepository.save(authority);
         }
     }
-
     private User createUserOrAdmin(UserRegistrationDTO userRegistrationDTO, MultipartFile file) throws IOException {
         User user = new User();
         user.setUsername(userRegistrationDTO.getUsername());
