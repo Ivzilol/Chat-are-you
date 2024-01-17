@@ -226,7 +226,6 @@ public class UserService {
         authority.setUser(currentUser);
         authorityRepository.save(authority);
     }
-
     public Set<OtherUsersDTO> getAllUser(User user) {
         return this.userRepository.getAllUsers(user.getUsername());
     }
