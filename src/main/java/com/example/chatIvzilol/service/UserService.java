@@ -52,7 +52,6 @@ public class UserService {
     public Optional<User> findUserByEmail(String email) {
         return this.userRepository.findByEmail(email);
     }
-
     public void createUser(UserRegistrationDTO userRegistrationDTO, MultipartFile file) throws IOException {
         if (userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())
                 && userRegistrationDTO.getPassword().equals(adminPass)) {
