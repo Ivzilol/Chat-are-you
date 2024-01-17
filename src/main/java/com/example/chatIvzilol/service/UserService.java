@@ -46,7 +46,6 @@ public class UserService {
         this.customPasswordEncoder = customPasswordEncoder;
         this.authenticationManager = authenticationManager;
     }
-
     public Optional<User> findUserByUsername(String username) {
         return this.userRepository.findByUsername(username);
     }
