@@ -170,7 +170,6 @@ public class UserService {
     public Optional<UserDTO> getUserById(Long id) {
         return this.userRepository.findUserById(id);
     }
-
     public boolean updateUser(UpdateUserDTO updateUserDTO, Long id, MultipartFile avatar) throws IOException {
         User updateUser = this.userRepository.findByUserId(id);
         Optional<User> userUsername = this.userRepository.findByUsername(updateUserDTO.getUsername());
