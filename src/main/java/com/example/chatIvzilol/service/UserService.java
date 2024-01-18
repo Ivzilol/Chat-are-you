@@ -123,7 +123,6 @@ public class UserService {
     public UserDTO findCurrentUser(String username) {
         return this.userRepository.findCurrentUserByUsername(username);
     }
-
     public Optional<User> findByEmail(String email) {
         return this.userRepository.findByEmail(email);
     }
