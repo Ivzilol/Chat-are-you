@@ -209,7 +209,6 @@ public class UserService {
             return false;
         }
     }
-
     private boolean ifPasswordMatch(ChangePasswordDto changePasswordDto, User user) {
         boolean matchesOldPassword = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
