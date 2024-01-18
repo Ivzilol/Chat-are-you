@@ -196,7 +196,6 @@ public class UserService {
             }
         }
     }
-
     public boolean changeUserPassword(ChangePasswordDto changePasswordDto, User user) {
         boolean passwordMatch = ifPasswordMatch(changePasswordDto, user);
         if (passwordMatch) {
