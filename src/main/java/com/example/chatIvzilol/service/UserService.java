@@ -127,7 +127,6 @@ public class UserService {
     public Optional<User> findByEmail(String email) {
         return this.userRepository.findByEmail(email);
     }
-
     public void sendEmailNewPassword(Optional<User> email) throws MessagingException, UnsupportedEncodingException {
         String subject = "Forgotten password";
         String senderName = "Chat are you Team";
