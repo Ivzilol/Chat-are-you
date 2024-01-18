@@ -162,7 +162,6 @@ public class UserService {
             return true;
         }
     }
-
     public Optional<UserDTO> getCurrentUser(User user) {
         return this.userRepository.findUserByUsername(user.getUsername());
     }
