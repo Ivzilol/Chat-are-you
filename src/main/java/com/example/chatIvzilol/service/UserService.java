@@ -146,7 +146,6 @@ public class UserService {
         helper.setText(mailContent, true);
         javaMailSender.send(message);
     }
-
     public boolean forgottenPasswordSetNew(ForgottenPasswordNewPasswordDto forgottenPasswordNewPasswordDto) {
         User user = this.userRepository
                 .findByVerificationCode(forgottenPasswordNewPasswordDto.getVerificationCode());
