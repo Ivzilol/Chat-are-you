@@ -26,6 +26,7 @@ import java.util.Set;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+
     @Value("${admin_password}")
     private String adminPass;
     private static final String REGISTER_URL = "http://localhost:3000/register";
