@@ -35,6 +35,7 @@ public class UserService {
     private static final String FORGOT_PASSWORD_URL = "http://localhost:3000/forgotten-password/";
 
     private final AuthorityRepository authorityRepository;
+
     private final CustomPasswordEncoder encoder;
     private final JavaMailSender javaMailSender;
     private final CloudinaryService cloudinaryService;
