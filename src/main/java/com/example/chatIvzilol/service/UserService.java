@@ -131,6 +131,7 @@ public class UserService {
         }
         return user;
     }
+
     public Optional<User> validate(String username) {
         return this.userRepository.findByUsernameAndIsValidate(username);
     }
