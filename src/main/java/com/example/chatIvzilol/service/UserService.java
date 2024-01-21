@@ -135,6 +135,7 @@ public class UserService {
     public Optional<User> validate(String username) {
         return this.userRepository.findByUsernameAndIsValidate(username);
     }
+
     public UserDTO findCurrentUser(String username) {
         return this.userRepository.findCurrentUserByUsername(username);
     }
