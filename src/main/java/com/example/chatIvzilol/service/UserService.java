@@ -122,6 +122,7 @@ public class UserService {
         helper.setText(mailContent, true);
         javaMailSender.send(message);
     }
+
     public User validateUser(String verification) {
         User user = this.userRepository.findByVerificationCode(verification);
         if (!user.getEmail().isEmpty()) {
