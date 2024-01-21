@@ -60,6 +60,7 @@ public class UserService {
     public Optional<User> findUserByUsername(String username) {
         return this.userRepository.findByUsername(username);
     }
+
     public Optional<User> findUserByEmail(String email) {
         return this.userRepository.findByEmail(email);
     }
