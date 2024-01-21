@@ -182,6 +182,7 @@ public class UserService {
     public Optional<UserDTO> getCurrentUser(User user) {
         return this.userRepository.findUserByUsername(user.getUsername());
     }
+
     public Optional<UserDTO> getUserById(Long id) {
         return this.userRepository.findUserById(id);
     }
