@@ -45,7 +45,6 @@ public class ChatRoomService {
         return user.getAuthorities()
                 .stream().anyMatch(auth -> AuthorityEnum.chatModerator.name().equals(auth.getAuthority()));
     }
-
     public Set<UserRoomsDTO> getUserRooms(User user) {
         return this.chatRoomRepository.findUserRooms(user.getUsername());
     }
