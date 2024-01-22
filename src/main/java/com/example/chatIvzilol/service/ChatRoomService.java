@@ -20,7 +20,6 @@ public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
     private final UserRepository userRepository;
     private final UserService userService;
-
     public ChatRoomService(ChatRoomRepository chatRoomRepository, UserRepository userRepository, UserService userService) {
         this.chatRoomRepository = chatRoomRepository;
         this.userRepository = userRepository;
