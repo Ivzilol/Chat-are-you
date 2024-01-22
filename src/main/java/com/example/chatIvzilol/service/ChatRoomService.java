@@ -51,7 +51,6 @@ public class ChatRoomService {
     public Set<OtherUsersDTO> findUsersOnRoom(String roomId) {
         return this.chatRoomRepository.findUsersInRoom(roomId);
     }
-
     public boolean addUserInRoom(String roomId, User user, AddUserRoomDTO addUserRoomDTO) {
        User userWhoAdds = this.userRepository.findByUserId(user.getId());
        User userForAdd = this.userRepository.findByUserId(addUserRoomDTO.getId());
