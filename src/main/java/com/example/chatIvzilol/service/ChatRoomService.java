@@ -54,6 +54,7 @@ public class ChatRoomService {
     public Set<UserRoomsDTO> getUserRooms(User user) {
         return this.chatRoomRepository.findUserRooms(user.getUsername());
     }
+
     public Set<OtherUsersDTO> findUsersOnRoom(String roomId) {
         return this.chatRoomRepository.findUsersInRoom(roomId);
     }
