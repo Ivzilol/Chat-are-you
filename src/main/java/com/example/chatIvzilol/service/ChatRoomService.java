@@ -18,6 +18,7 @@ import java.util.Set;
 @Service
 public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
+
     private final UserRepository userRepository;
     private final UserService userService;
     public ChatRoomService(ChatRoomRepository chatRoomRepository, UserRepository userRepository, UserService userService) {
