@@ -28,6 +28,7 @@ public class ChatRoomService {
         this.userRepository = userRepository;
         this.userService = userService;
     }
+
     public boolean createRoom(User user, CreateChatRoomDTO createChatRoomDTO) {
         User currentUser = userRepository.findByUserId(user.getId());
         if (createChatRoomDTO.getChatroomName() != null) {
