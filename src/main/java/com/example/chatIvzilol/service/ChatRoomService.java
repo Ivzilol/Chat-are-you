@@ -45,6 +45,7 @@ public class ChatRoomService {
         }
         return false;
     }
+
     private static boolean isAdmin(User user) {
         return user.getAuthorities()
                 .stream().anyMatch(auth -> AuthorityEnum.chatModerator.name().equals(auth.getAuthority()));
