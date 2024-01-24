@@ -103,6 +103,7 @@ public class UserController {
         Optional<UserDTO> currentUser = this.userService.getCurrentUser(user);
         return ResponseEntity.ok(currentUser);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id){
         Optional<UserDTO> user = this.userService.getUserById(id);
