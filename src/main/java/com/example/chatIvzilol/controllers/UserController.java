@@ -31,6 +31,7 @@ public class UserController {
     private final UserService userService;
 
     private final AuthenticationManager authenticationManager;
+
     private final JwtUtil jwtUtil;
 
     public UserController(UserService userService, AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
