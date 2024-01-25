@@ -67,7 +67,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-
     @PostMapping("/register/forgotten-password")
     public ResponseEntity<?> forgottenPasswordEmail(@RequestBody ForgottenPasswordEmailDto forgottenPasswordDto) throws MessagingException, UnsupportedEncodingException {
         Optional<User> email = this.userService.findByEmail(forgottenPasswordDto.getEmail());
