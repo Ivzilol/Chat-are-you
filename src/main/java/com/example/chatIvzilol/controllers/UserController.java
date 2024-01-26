@@ -40,6 +40,7 @@ public class UserController {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }
+
     @PostMapping(value = "/register", consumes = {"multipart/form-data"})
     public ResponseEntity<?> createUser(
             @RequestPart(value = "avatar", required = false) MultipartFile file,
@@ -61,6 +62,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+    
     @PostMapping("/register/verify/{verification}")
     private ResponseEntity<?> verificationUser(@PathVariable String verification) {
         User user = this.userService.validateUser(verification);
