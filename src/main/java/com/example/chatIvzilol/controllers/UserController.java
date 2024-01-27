@@ -109,7 +109,6 @@ public class UserController {
         Optional<UserDTO> user = this.userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
-
     @PatchMapping("/edit/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id,
                                         @RequestPart(value = "avatar", required = false) MultipartFile avatar,
