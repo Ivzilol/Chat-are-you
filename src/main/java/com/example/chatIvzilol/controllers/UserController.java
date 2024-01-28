@@ -34,6 +34,7 @@ public class UserController {
 
     private final JwtUtil jwtUtil;
 
+
     public UserController(UserService userService, AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
