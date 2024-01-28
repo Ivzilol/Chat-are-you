@@ -40,6 +40,7 @@ public class UserController {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }
+
     @PostMapping(value = "/register", consumes = {"multipart/form-data"})
     public ResponseEntity<?> createUser(
             @RequestPart(value = "avatar", required = false) MultipartFile file,
