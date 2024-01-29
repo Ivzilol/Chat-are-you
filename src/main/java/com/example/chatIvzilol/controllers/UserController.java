@@ -62,7 +62,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-
     @PostMapping("/register/verify/{verification}")
     private ResponseEntity<?> verificationUser(@PathVariable String verification) {
         User user = this.userService.validateUser(verification);
