@@ -44,7 +44,7 @@ public class UserController {
     @PostMapping(value = "/register", consumes = {"multipart/form-data"})
     public ResponseEntity<?> createUser(
             @RequestPart(value = "avatar", required = false) MultipartFile file,
-            @RequestPart(value = "dto") UserRegistrationDTO userRegistrationDTO) throws MessagingException, IOException {
+            @RequestPart(value = "dto")  UserRegistrationDTO userRegistrationDTO) throws MessagingException, IOException {
         this.userService.createUser(userRegistrationDTO, file);
         this.userService.sendVerificationEmail(userRegistrationDTO);
         try {
