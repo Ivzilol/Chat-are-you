@@ -69,6 +69,7 @@ public class JwtFilter extends OncePerRequestFilter {
         authentication.setDetails(
                 new WebAuthenticationDetailsSource().buildDetails(request)
         );
+
         //this is where authentication happens and user is now valid
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);
