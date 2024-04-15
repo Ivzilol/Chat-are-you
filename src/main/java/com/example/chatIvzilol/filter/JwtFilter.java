@@ -27,6 +27,7 @@ public class JwtFilter extends OncePerRequestFilter {
         this.userRepository = userRepository;
         this.jwtUtil = jwtUtil;
     }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NotNull HttpServletResponse response,
                                     @NotNull FilterChain chain) throws ServletException, IOException {
